@@ -138,7 +138,8 @@ public class EventBus {
      * ThreadMode} and priority.
      */
     public void register(Object subscriber) {
-        Class<?> subscriberClass = subscriber.getClass();
+        Class<?> subscriberClass = subscriber.getClass();//获取订阅者对象class
+        // TODO: 2019/3/13 获取被Subscribe注解的方法
         List<SubscriberMethod> subscriberMethods = subscriberMethodFinder.findSubscriberMethods(subscriberClass);
         synchronized (this) {
             for (SubscriberMethod subscriberMethod : subscriberMethods) {
@@ -147,6 +148,10 @@ public class EventBus {
         }
     }
 
+    /**
+     * @param subscriber
+     * @param subscriberMethod
+     */
     // Must be called in synchronized block
     private void subscribe(Object subscriber, SubscriberMethod subscriberMethod) {
         Class<?> eventType = subscriberMethod.eventType;
@@ -300,6 +305,7 @@ public class EventBus {
      * Posts the given event to the event bus and holds on to the event (because it is sticky). The most recent sticky
      * event of an event's type is kept in memory for future access by subscribers using {@link Subscribe#sticky()}.
      */
+    // TODO: 2019/3/13 把事件放到集合中缓存起来 
     public void postSticky(Object event) {
         synchronized (stickyEvents) {
             stickyEvents.put(event.getClass(), event);

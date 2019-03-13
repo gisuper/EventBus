@@ -66,7 +66,7 @@ public class HandlerPoster extends Handler implements Poster {
                 }
                 eventBus.invokeSubscriber(pendingPost);
                 long timeInMethod = SystemClock.uptimeMillis() - started;
-                if (timeInMethod >= maxMillisInsideHandleMessage) {
+                if (timeInMethod >= maxMillisInsideHandleMessage) {// TODO: 2019/3/13 超过10秒？ 
                     if (!sendMessage(obtainMessage())) {
                         throw new EventBusException("Could not send handler message");
                     }

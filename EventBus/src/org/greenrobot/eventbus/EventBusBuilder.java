@@ -169,6 +169,7 @@ public class EventBusBuilder {
         if (mainThreadSupport != null) {
             return mainThreadSupport;
         } else if (AndroidLogger.isAndroidLogAvailable()) {
+            // TODO: 2019/3/13 获取Android主线程的looper 用于将子线程的任务抛到主线程
             Object looperOrNull = getAndroidMainLooperOrNull();
             return looperOrNull == null ? null :
                     new MainThreadSupport.AndroidHandlerMainThreadSupport((Looper) looperOrNull);

@@ -18,9 +18,10 @@ package org.greenrobot.eventbus;
 import android.os.Looper;
 
 /**
- * Interface to the "main" thread, which can be whatever you like. Typically on Android, Android's main thread is used.
+ * Interface to the "main" thread, which can be whatever you like. Typically on Android,
+ * Android's main thread is used.
  */
-public interface MainThreadSupport {
+public interface  MainThreadSupport {
 
     boolean isMainThread();
 
@@ -34,6 +35,7 @@ public interface MainThreadSupport {
             this.looper = looper;
         }
 
+        // TODO: 2019/3/13 通过主线程的handler来判断当前是否是主线程
         @Override
         public boolean isMainThread() {
             return looper == Looper.myLooper();
